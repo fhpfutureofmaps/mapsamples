@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>**************</title>
+        <title>KML</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
         <link rel="stylesheet" href="css/jquery.mobile.min.css">
         <link rel="stylesheet" href="css/app.css">
@@ -16,13 +16,62 @@
     <body>
         <div data-role="page" id="main">
             <div data-role="header">
-                <h1>*************</h1>
+                <h1>KML</h1>
                 <a data-rel="back">Back</a>
             </div>
 
-            <div role="main">
-                <div id="map" data-role="heremap" data-center="52.41326,13.05006" data-zoomlevel="16" data-height="auto"></div>
-            </div>
+            <div id="map" data-role="heremap" data-center="52.39935,13.04793"
+                data-zoomlevel="12" data-height="auto" data-components="Behavior,InfoBubbles"
+                data-basemaptype="SMARTMAP"></div>
         </div>
+
+        <script>
+            $('#map').on('heremapready', configureMap);
+
+            function configureMap(event, map) {
+                // Create a KML manager
+                var kml = new nokia.maps.kml.Manager();
+
+                // Request and parse the KML data from the server
+                kml.parseKML('data/potsdam-sights.kml');
+
+                // Bind a state observer to the KML manager
+                kml.addObserver('state', onKMLParsed);
+
+                // This function is called whenever the KML manager changes its state
+                // (e.g. when it finished parsing the data)
+                function onKMLParsed(kmlManager) {
+                    if (kmlManager.state == 'finished') {
+                        // KML file was successfully parsed
+
+                        // Create a result set from the parsed data
+                        var resultSet = new nokia.maps.kml.component.KMLResultSet(kmlManager, map);
+
+                        // Bind a state observer to the result set
+                        resultSet.addObserver('state', onResultSetChanged);
+
+                        // This function is called whenever the result set changes its state
+                        // (e.g. when it has processed all points)
+                        function onResultSetChanged(resultSet) {
+                            if (resultSet.state == 'finished') {
+
+                                // Request the bounding box and zoom/pan to it
+                                var boundingBox = container.getBoundingBox();
+                                setTimeout(function() {
+                                    map.zoomTo(boundingBox);
+                                }, 500);
+                            }
+                        }
+
+                        // Create a cointer with all KML objects in it
+                        var container = resultSet.create();
+
+                        // Add the container to the map
+                        map.objects.add(container);
+                    }
+                };
+            }
+
+        </script>
     </body>
 </html>

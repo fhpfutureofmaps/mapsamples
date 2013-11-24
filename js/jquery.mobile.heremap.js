@@ -29,7 +29,7 @@
                         $elem.height(0);
                         var $page = $elem.closest(':jqmData(role=page)');
                         var height = $page.height();
-                        $page.children().each(function(i,el) {
+                        $page.children().not('[data-position="fixed"]').each(function(i,el) {
                             height -= $(el).outerHeight();
                         });
                         $elem.height(height);

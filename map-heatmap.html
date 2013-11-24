@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>**************</title>
+        <title>Heatmap</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
         <link rel="stylesheet" href="css/jquery.mobile.min.css">
         <link rel="stylesheet" href="css/app.css">
@@ -16,13 +16,108 @@
     <body>
         <div data-role="page" id="main">
             <div data-role="header">
-                <h1>*************</h1>
+                <h1>Heatmap</h1>
                 <a data-rel="back">Back</a>
             </div>
 
-            <div role="main">
-                <div id="map" data-role="heremap" data-center="52.41326,13.05006" data-zoomlevel="16" data-height="auto"></div>
-            </div>
+            <div id="map" data-role="heremap" data-center="52.51607,13.37699"
+                data-zoomlevel="10" data-height="auto" data-components="Behavior"
+                data-basemaptype="SMARTMAP"></div>
         </div>
+
+        <script>
+            $('#map').on('heremapready', configureMap);
+
+            function configureMap(event, map) {
+                // Restrict map zooming to the levels that make sense
+                map.minZoomLevel = 8;
+                map.maxZoomLevel = 11;
+
+                //
+                var heatmapProvider = new nokia.maps.heatmap.Overlay({
+                    max: 11,
+                    opacity: 0.6,
+                    type: 'value'
+                });
+
+                var data = [
+                   {
+                      "longitude" : 13.36667,
+                      "value" : 17434,
+                      "latitude" : 52.51667,
+                      "name" : "Mitte"
+                   },
+                   {
+                      "longitude" : 13.43333,
+                      "value" : 14146,
+                      "latitude" : 52.5,
+                      "name" : "Friedrichshain-Kreuzberg"
+                   },
+                   {
+                      "longitude" : 13.40222,
+                      "value" : 20873,
+                      "latitude" : 52.56889,
+                      "name" : "Pankow"
+                   },
+                   {
+                      "longitude" : 13.28492,
+                      "value" : 11746,
+                      "latitude" : 52.49889,
+                      "name" : "Charlottenburg-Wilmersdorf"
+                   },
+                   {
+                      "longitude" : 13.16667,
+                      "value" : 9934,
+                      "latitude" : 52.53333,
+                      "name" : "Spandau"
+                   },
+                   {
+                      "longitude" : 13.25,
+                      "value" : 11738,
+                      "latitude" : 52.43333,
+                      "name" : "Steglitz-Zehlendorf"
+                   },
+                   {
+                      "longitude" : 13.38333,
+                      "value" : 13799,
+                      "latitude" : 52.46667,
+                      "name" : "Tempelhof-Schöneberg"
+                   },
+                   {
+                      "longitude" : 13.45,
+                      "value" : 15408,
+                      "latitude" : 52.48333,
+                      "name" : "Neukölln"
+                   },
+                   {
+                      "longitude" : 13.56667,
+                      "value" : 10898,
+                      "latitude" : 52.45,
+                      "name" : "Treptow-Köpenick"
+                   },
+                   {
+                      "longitude" : 13.58428,
+                      "value" : 12393,
+                      "latitude" : 52.53972,
+                      "name" : "Marzahn-Hellersdorf"
+                   },
+                   {
+                      "longitude" : 13.5,
+                      "value" : 12804,
+                      "latitude" : 52.53333,
+                      "name" : "Lichtenberg"
+                   },
+                   {
+                      "longitude" : 13.35,
+                      "value" : 10674,
+                      "latitude" : 52.56667,
+                      "name" : "Reinickendorf"
+                   }
+                ];
+
+                heatmapProvider.addData(data);
+                map.overlays.add(heatmapProvider);
+            }
+        </script>
     </body>
 </html>

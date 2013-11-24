@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Multiple Markers</title>
+        <title>Polylines</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
         <link rel="stylesheet" href="css/jquery.mobile.min.css">
         <link rel="stylesheet" href="css/app.css">
@@ -16,36 +16,39 @@
     <body>
         <div data-role="page" id="main">
             <div data-role="header">
-                <h1>Multiple Markers</h1>
+                <h1>Polylines</h1>
                 <a data-rel="back">Back</a>
             </div>
 
-            <div id="map" data-role="heremap" data-height="auto" data-components="Behavior"></div>
+            <div id="map" data-role="heremap" data-center="52.41326,13.05006"
+                data-zoomlevel="16" data-height="auto" data-components="Behavior"
+                data-basemaptype="SMARTMAP"></div>
         </div>
 
         <script>
             $('#map').on('heremapready', configureMap);
 
             function configureMap(event, map) {
-                // Create a container that will hold our markers, add the container to the map
-                var container = new nokia.maps.map.Container();
-                map.objects.add(container);
-
-                // Create two different markers
-                var markerPappelallee = new nokia.maps.map.StandardMarker([52.41326, 13.05006], {
-                    text: 'P'
+                // Create a polyline with some points
+                var line = new nokia.maps.map.Polyline([
+                    [52.49381549981408,13.461699526488587],
+                    [52.50309423205522,13.469231169402406],
+                    [52.51085217930863,13.434505553047018],
+                    [52.39150690290327,13.065042493515335],
+                    [52.41412626066938,13.050646654227648],
+                    [52.41347512274040,13.049911728957483]
+                ], {
+                    pen: {
+                        strokeColor: "#0066FF88",
+                        lineWidth: 8
+                    }
                 });
 
-                var markerFriedrichEbertStrasse = new nokia.maps.map.StandardMarker([52.39540, 13.059018], {
-                    text: 'F'
-                });
+                // Add the shape to the map
+                map.objects.add(line);
 
-                // Add the markers to the container (and thus to the map)
-                container.objects.add(markerPappelallee);
-                container.objects.add(markerFriedrichEbertStrasse);
-
-                // Ask for the smallest possible rectangle that contains all markers in the container
-                var boundingBox = container.getBoundingBox();
+                // Ask for the smallest possible rectangle that contains all points on the line
+                var boundingBox = line.getBoundingBox();
 
                 // There seems to be a bug(?) that forces us to delay the zoomTo call by half a second
                 setTimeout(function() {

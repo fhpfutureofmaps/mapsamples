@@ -20,7 +20,9 @@
                 <a data-rel="back">Back</a>
                 <a href="#router">Route</a>
             </div>
-            <div id="map" data-role="heremap" data-center="52.41326,13.05006" data-zoomlevel="16" data-height="auto" data-components="Behavior"></div>
+
+            <div id="map" data-role="heremap" data-center="52.41326,13.05006"
+                data-zoomlevel="10" data-height="auto" data-components="Behavior"></div>
         </div>
 
         <div data-role="page" id="router">
@@ -28,6 +30,7 @@
                 <h1>Route</h1>
                 <a data-rel="back">Back</a>
             </div>
+
             <div data-role="content" class="ui-content">
                 <label for="startaddr">Start:</label>
                 <input type="text" name="startaddr" id="startaddr" value="Alexanderplatz, Berlin">
@@ -38,8 +41,9 @@
         <script>
             $('#map').on('heremapready', configureMap);
 
-
             function configureMap(event, map) {
+                // Create a search manager (converts address query to coordinates)
+                // and a router (calculates the route from A to B)
                 var searchManager = nokia.places.search.manager;
                 var router = new nokia.maps.routing.Manager();
                 var routeModes = [{
@@ -49,40 +53,68 @@
                     trafficMode: 'default'
                 }];
 
-                router.addObserver('state', onRouteCalculated);
+                // Add a click handler to the 'Show route' button
+                $('#routeButton').on('click', buttonClickHandler);
 
-                $('#routeButton').on('click', function() {
-                    $.mobile.navigate('#mappage');
+                function buttonClickHandler() {
+                    // Switch back to the home page
+                    $.mobile.changePage('');
+
+                    // Ask the search manager to geocode the address query and
+                    // call the onStartAddressGeocoded function when finished
                     searchManager.geoCode({
                         searchTerm: $('#startaddr').val(),
                         onComplete: onStartAddressGeocoded
                     });
-                });
+                }
 
+                // This gets called when the search manager finishes geocoding
                 function onStartAddressGeocoded(data, requestStatus, requestId) {
                     if (requestStatus == "OK") {
+                        // We got a successful response ...
                         if (data && data.location) {
+                            // ... and it has a location with coordinate in it
+
+                            // Create a list of waypoints and add start and destination to it
                             var waypoints = new nokia.maps.routing.WaypointParameterList();
                             waypoints.addCoordinate(data.location.position);
-                            waypoints.addCoordinate(new nokia.maps.geo.Coordinate(52.516650273565716, 13.391368569239404));
-                            waypoints.addCoordinate(new nokia.maps.geo.Coordinate(52.4101601, 13.0518198));
+                            waypoints.addCoordinate(new nokia.maps.geo.Coordinate(52.41326, 13.05006));
+
+                            // Now tell the router to calculate the route from A to B
                             router.calculateRoute(waypoints, routeModes);
                         } else {
-                            alert("Adresse konnte nicht gefunden werden");
+                            // No coordinates were found for the address query
+                            alert("Sorry, couldn't find your address.");
                         }
                     } else {
-                        alert("Fehler aufgetreten :-(");
+                        // Some other error occured
+                        alert("An error occured :-(");
                     }
                 }
 
+                // Whenever the router changes it's state, call the onRouteCalculated function
+                router.addObserver('state', onRouteCalculated);
+
                 function onRouteCalculated(observedRouter, key, value) {
                     if (value == "finished") {
+                        // The route calculation has finished
+
+                        // Get the found route(s) – there might be more than one
                         var routes = observedRouter.getRoutes();
 
+                        // We are only interested in the first route
                         var mapRoute = new nokia.maps.routing.component.RouteResultSet(routes[0]).container;
+
+                        // Add that route to map
                         map.objects.add(mapRoute);
-                        map.zoomTo(mapRoute.getBoundingBox(), false, "default");
+
+                        // Request the bounding box of the route
+                        var boundingBox = mapRoute.getBoundingBox();
+
+                        // Pan and zoom the map to the bounding box
+                        map.zoomTo(boundingBox, false, "default");
                     } else if (value == "failed") {
+                        // Something went wrong :-(
                         alert("The routing request failed.");
                     }
                 }

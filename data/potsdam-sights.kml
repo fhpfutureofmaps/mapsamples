@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<kml xmlns="http://earth.google.com/kml/2.2">
+
+    <Document>
+        <Folder>
+            <name>CT-Potsdam-2013_Sehenswuerdigkeiten</name>
+
+            <Style id="style96">
+                <IconStyle>
+                    <Icon>
+                        <href>http://maps.google.com/mapfiles/ms/micons/pink-pushpin.png</href>
+                    </Icon>
+                </IconStyle>
+            </Style>
+
+            <Placemark><name>{1} Freundschaftsinsel</name><styleUrl>#style96</styleUrl><Point><coordinates>13.065834,52.395218,0</coordinates></Point></Placemark>
+            <Placemark><name>{2} Alter Markt</name><styleUrl>#style96</styleUrl><Point><coordinates>13.061264,52.395622,0</coordinates></Point></Placemark>
+            <Placemark><name>{3} Neuer Lustgarten</name><styleUrl>#style96</styleUrl><Point><coordinates>13.058732,52.393108,0</coordinates></Point></Placemark>
+            <Placemark><name>{4} Marstall</name><styleUrl>#style96</styleUrl><Point><coordinates>13.055502,52.395283,0</coordinates></Point></Placemark>
+            <Placemark><name>{5} Entlang der Breiten Straße</name><styleUrl>#style96</styleUrl><Point><coordinates>13.051865,52.395565,0</coordinates></Point></Placemark>
+            <Placemark><name>{6} Neuer Markt</name><styleUrl>#style96</styleUrl><Point><coordinates>13.057369,52.396252,0</coordinates></Point></Placemark>
+            <Placemark><name>{7} Platz der Einheit und Stadtkanal</name><styleUrl>#style96</styleUrl><Point><coordinates>13.058978,52.397831,0</coordinates></Point></Placemark>
+            <Placemark><name>{8} Bassinplatz und Kirche St. Peter und Paul</name><styleUrl>#style96</styleUrl><Point><coordinates>13.060298,52.401112,0</coordinates></Point></Placemark>
+            <Placemark><name>{9} Französische Kirche</name><styleUrl>#style96</styleUrl><Point><coordinates>13.062755,52.400566,0</coordinates></Point></Placemark>
+            <Placemark><name>{10} Holländisches Viertel</name><styleUrl>#style96</styleUrl><Point><coordinates>13.060427,52.402954,0</coordinates></Point></Placemark>
+            <Placemark><name>{11} Nauener Tor mit Friedrich-Ebert-Straße</name><styleUrl>#style96</styleUrl><Point><coordinates>13.05783,52.403439,0</coordinates></Point></Placemark>
+            <Placemark><name>{12} Auf der Brandenburger Straße zum Luisenplatz</name><styleUrl>#style96</styleUrl><Point><coordinates>13.05297,52.400173,0</coordinates></Point></Placemark>
+            <Placemark><name>{13} Friedenskirche und Marlygarten</name><styleUrl>#style96</styleUrl><Point><coordinates>13.0431,52.401031,0</coordinates></Point></Placemark>
+            <Placemark><name>{14} Schloss und Park Sanssouci</name><styleUrl>#style96</styleUrl><Point><coordinates>13.038454,52.404049,0</coordinates></Point></Placemark>
+            <Placemark><name>{15} Park und Schloss Charlottenhof</name><styleUrl>#style96</styleUrl><Point><coordinates>13.028461,52.39357,0</coordinates></Point></Placemark>
+            <Placemark><name>{16} Orangerie</name><styleUrl>#style96</styleUrl><Point><coordinates>13.02971,52.405167,0</coordinates></Point></Placemark>
+            <Placemark><name>{17} Neues Palais mit den Communs</name><styleUrl>#style96</styleUrl><Point><coordinates>13.014421,52.401215,0</coordinates></Point></Placemark>
+            <Placemark><name>{18} Ruinenberg</name><styleUrl>#style96</styleUrl><Point><coordinates>13.038776,52.410084,0</coordinates></Point></Placemark>
+            <Placemark><name>{19} Krongut und Kirche in Bornstedt</name><styleUrl>#style96</styleUrl><Point><coordinates>13.030375,52.40863,0</coordinates></Point></Placemark>
+            <Placemark><name>{20} Belvedere auf dem Klausberg</name><styleUrl>#style96</styleUrl><Point><coordinates>13.019292,52.407059,0</coordinates></Point></Placemark>
+            <Placemark><name>{21} Schloss Lindstedt</name><styleUrl>#style96</styleUrl><Point><coordinates>13.010699,52.41003,0</coordinates></Point></Placemark>
+            <Placemark><name>{22} Volkspark</name><styleUrl>#style96</styleUrl><Point><coordinates>13.047574,52.419659,0</coordinates></Point></Placemark>
+            <Placemark><name>{23} Russische Kolonie Alexandrowka</name><styleUrl>#style96</styleUrl><Point><coordinates>13.057423,52.411373,0</coordinates></Point></Placemark>
+            <Placemark><name>{24} Alexander-Newski-Kirche</name><styleUrl>#style96</styleUrl><Point><coordinates>13.057584,52.41530600000001,0</coordinates></Point></Placemark>
+            <Placemark><name>{25} Belvedere auf dem Pfingstberg</name><styleUrl>#style96</styleUrl><Point><coordinates>13.058925,52.418812,0</coordinates></Point></Placemark>
+            <Placemark><name>{26} Villenviertel in der Nauener Vorstadt</name><styleUrl>#style96</styleUrl><Point><coordinates>13.064032,52.415314,0</coordinates></Point></Placemark>
+            <Placemark><name>{27} Neuer Garten</name><styleUrl>#style96</styleUrl><Point><coordinates>13.068216,52.413662,0</coordinates></Point></Placemark>
+            <Placemark><name>{28} Schwanenallee</name><styleUrl>#style96</styleUrl><Point><coordinates>13.081949,52.415718,0</coordinates></Point></Placemark>
+            <Placemark><name>{29} Glienicker Brücke</name><styleUrl>#style96</styleUrl><Point><coordinates>13.090017,52.413494,0</coordinates></Point></Placemark>
+            <Placemark><name>{30} Kulturstandort Schiffbauergasse</name><styleUrl>#style96</styleUrl><Point><coordinates>13.075254,52.40341600000001,0</coordinates></Point></Placemark>
+            <Placemark><name>{31} Klein-Glienicke</name><styleUrl>#style96</styleUrl><Point><coordinates>13.100638,52.40930600000001,0</coordinates></Point></Placemark>
+            <Placemark><name>{32} Babelsberger Schloss und Park</name><styleUrl>#style96</styleUrl><Point><coordinates>13.092635,52.40757800000001,0</coordinates></Point></Placemark>
+            <Placemark><name>{33} Villenkolonie am Griebnitzsee</name><styleUrl>#style96</styleUrl><Point><coordinates>13.112698,52.401527,0</coordinates></Point></Placemark>
+            <Placemark><name>{34} Medienstadt und Filmpark Babelsberg</name><styleUrl>#style96</styleUrl><Point><coordinates>13.119435,52.386967,0</coordinates></Point></Placemark>
+            <Placemark><name>{35} Weberviertel mit Friedrichskirche</name><styleUrl>#style96</styleUrl><Point><coordinates>13.095617,52.39415,0</coordinates></Point></Placemark>
+            <Placemark><name>{36} Karl-Liebknecht-Straße</name><styleUrl>#style96</styleUrl><Point><coordinates>13.094265,52.396149,0</coordinates></Point></Placemark>
+            <Placemark><name>{37} Brauhausberg</name><styleUrl>#style96</styleUrl><Point><coordinates>13.062637,52.387596,0</coordinates></Point></Placemark>
+            <Placemark><name>{38} Einsteinturm auf dem Telegrafenberg</name><styleUrl>#style96</styleUrl><Point><coordinates>13.063871,52.37888700000001,0</coordinates></Point></Placemark>
+            <Placemark><name>{39} Halbinsel Hermannswerder</name><styleUrl>#style96</styleUrl><Point><coordinates>13.033175,52.382671,0</coordinates></Point></Placemark>
+            <Placemark><name>{40} Sacrow</name><styleUrl>#style96</styleUrl><Point><coordinates>13.096261,52.424564,0</coordinates></Point></Placemark>
+            <Placemark><name>{41} Pfaueninsel</name><styleUrl>#style96</styleUrl><Point><coordinates>13.126001,52.432652,0</coordinates></Point></Placemark>
+        </Folder>
+    </Document>
+</kml>

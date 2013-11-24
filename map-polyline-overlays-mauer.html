@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Polylines</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <link rel="stylesheet" href="css/jquery.mobile.min.css">
+        <link rel="stylesheet" href="css/app.css">
+        <script src="http://js.api.here.com/se/2.5.3/jsl.js?with=all"></script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery.mobile.min.js"></script>
+        <script src="js/jquery.mobile.heremap.min.js"></script>
+        <script src="js/mapinit.js"></script>
+    </head>
+
+    <body>
+        <div data-role="page" id="main">
+            <div data-role="header">
+                <h1>Polylines</h1>
+                <a data-rel="back">Back</a>
+            </div>
+
+            <div id="map" data-role="heremap" data-center="52.51607,13.37699"
+                data-zoomlevel="10" data-height="auto" data-components="Behavior"
+                data-basemaptype="SMARTMAP"></div>
+        </div>
+
+        <script>
+            $('#map').on('heremapready', configureMap);
+
+            function configureMap(event, map) {
+                // Request Berlin coordinates
+                $.getJSON('data/berlin.json', function(data) {
+                    var points = [];
+                    $.each(data.coordinates[0], function(i, p) {
+                        points.push([p[1], p[0]]);
+                    });
+
+                    // Create a polygon with the points from the data file
+                    var berlin = new nokia.maps.map.Polygon(points, {
+                        pen: {
+                            strokeColor: "#00000066",
+                            lineWidth: 4
+                        },
+                        brush: {
+                            color: '#0000'
+                        }
+                    });
+
+                    // Add the polygon to the map
+                    map.objects.add(berlin);
+
+                    // Ask for the smallest possible rectangle that contains all points on the line
+                    var boundingBox = berlin.getBoundingBox();
+
+                    // Move the map to the center of the bounding box and zoom in as far as possible
+                    map.zoomTo(boundingBox);
+                });
+
+
+                // Request mauer cordinates from the server
+                $.getJSON('data/mauer.json', function(data) {
+                    var points = [];
+                    $.each(data.coordinates[0], function(i, p) {
+                        points.push([p[1], p[0]]);
+                    });
+
+                    // Create a polygon with the points from the data file
+                    var mauer = new nokia.maps.map.Polygon(points, {
+                        pen: {
+                            strokeColor: "#FF0000",
+                            lineWidth: 4
+                        },
+                        brush: {
+                            color: '#0000'
+                        }
+                    });
+
+                    // Add the polygon to the map
+                    map.objects.add(mauer);
+
+                    // Ask for the smallest possible rectangle that contains all points on the line
+                    var boundingBox = mauer.getBoundingBox();
+
+                    // Move the map to the center of the bounding box and zoom in as far as possible
+                    map.zoomTo(boundingBox);
+                });
+
+            }
+        </script>
+    </body>
+</html>
