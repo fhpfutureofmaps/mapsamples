@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>**************</title>
+        <title>Routing</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
         <link rel="stylesheet" href="css/jquery.mobile.min.css">
         <link rel="stylesheet" href="css/app.css">
@@ -16,13 +16,78 @@
     <body>
         <div data-role="page" id="main">
             <div data-role="header">
-                <h1>*************</h1>
+                <h1>Routing</h1>
+                <a data-rel="back">Back</a>
+                <a href="#router">Route</a>
+            </div>
+            <div id="map" data-role="heremap" data-center="52.41326,13.05006" data-zoomlevel="16" data-height="auto" data-components="Behavior"></div>
+        </div>
+
+        <div data-role="page" id="router">
+            <div data-role="header">
+                <h1>Route</h1>
                 <a data-rel="back">Back</a>
             </div>
-
-            <div role="main">
-                <div id="map" data-role="heremap" data-center="52.41326,13.05006" data-zoomlevel="16" data-height="auto"></div>
+            <div data-role="content" class="ui-content">
+                <label for="startaddr">Start:</label>
+                <input type="text" name="startaddr" id="startaddr" value="Alexanderplatz, Berlin">
+                <button id="routeButton">Show route</button>
             </div>
         </div>
+
+        <script>
+            $('#map').on('heremapready', configureMap);
+
+
+            function configureMap(event, map) {
+                var searchManager = nokia.places.search.manager;
+                var router = new nokia.maps.routing.Manager();
+                var routeModes = [{
+                    type: 'shortest',
+                    transportModes: ['car'],
+                    options: 'avoidTollroad',
+                    trafficMode: 'default'
+                }];
+
+                router.addObserver('state', onRouteCalculated);
+
+                $('#routeButton').on('click', function() {
+                    $.mobile.navigate('#mappage');
+                    searchManager.geoCode({
+                        searchTerm: $('#startaddr').val(),
+                        onComplete: onStartAddressGeocoded
+                    });
+                });
+
+                function onStartAddressGeocoded(data, requestStatus, requestId) {
+                    if (requestStatus == "OK") {
+                        if (data && data.location) {
+                            var waypoints = new nokia.maps.routing.WaypointParameterList();
+                            waypoints.addCoordinate(data.location.position);
+                            waypoints.addCoordinate(new nokia.maps.geo.Coordinate(52.516650273565716, 13.391368569239404));
+                            waypoints.addCoordinate(new nokia.maps.geo.Coordinate(52.4101601, 13.0518198));
+                            router.calculateRoute(waypoints, routeModes);
+                        } else {
+                            alert("Adresse konnte nicht gefunden werden");
+                        }
+                    } else {
+                        alert("Fehler aufgetreten :-(");
+                    }
+                }
+
+                function onRouteCalculated(observedRouter, key, value) {
+                    if (value == "finished") {
+                        var routes = observedRouter.getRoutes();
+
+                        var mapRoute = new nokia.maps.routing.component.RouteResultSet(routes[0]).container;
+                        map.objects.add(mapRoute);
+                        map.zoomTo(mapRoute.getBoundingBox(), false, "default");
+                    } else if (value == "failed") {
+                        alert("The routing request failed.");
+                    }
+                }
+
+            }
+        </script>
     </body>
 </html>

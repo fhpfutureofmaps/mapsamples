@@ -29,8 +29,10 @@
             $('#map').on('heremapready', configureMap);
 
             function configureMap(event, map) {
+                // Create a circle at a defined position with a radius of 100 meters
                 var circle = new nokia.maps.map.Circle([52.41326,13.05006], 100);
 
+                // Add the circle to the map
                 map.objects.add(circle);
             }
         </script>
