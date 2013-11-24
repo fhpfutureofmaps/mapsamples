@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Marker</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <link rel="stylesheet" href="css/jquery.mobile.min.css">
+        <link rel="stylesheet" href="css/app.css">
+        <script src="http://js.api.here.com/se/2.5.3/jsl.js?with=all"></script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery.mobile.min.js"></script>
+        <script src="js/jquery.mobile.heremap.min.js"></script>
+        <script src="js/mapinit.js"></script>
+    </head>
+
+    <body>
+        <div data-role="page" id="main">
+            <div data-role="header">
+                <h1>Marker</h1>
+                <a data-rel="back">Back</a>
+            </div>
+
+            <div role="main">
+                <div id="map" data-role="heremap" data-center="52.41326,13.05006" data-zoomlevel="16" data-height="auto" data-components="Behavior" data-basemaptype="SATELLITE"></div>
+            </div>
+        </div>
+
+        <script>
+            $('#map').on('heremapready', configureMap);
+
+            function configureMap(event, map) {
+                var marker = new nokia.maps.map.StandardMarker([52.41326, 13.05006], {
+                    text: "FHP"
+                });
+
+                map.objects.add(marker);
+            }
+        </script>
+    </body>
+</html>

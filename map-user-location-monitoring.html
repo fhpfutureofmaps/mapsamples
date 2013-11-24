@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Location Monitoring</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+        <link rel="stylesheet" href="css/jquery.mobile.min.css">
+        <link rel="stylesheet" href="css/app.css">
+        <script src="http://js.api.here.com/se/2.5.3/jsl.js?with=all"></script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery.mobile.min.js"></script>
+        <script src="js/jquery.mobile.heremap.min.js"></script>
+        <script src="js/mapinit.js"></script>
+    </head>
+
+    <body>
+        <div data-role="page" id="main">
+            <div data-role="header">
+                <h1>Location Monitoring</h1>
+                <a data-rel="back">Back</a>
+            </div>
+
+            <div role="main">
+                <div id="map" data-role="heremap" data-center="0,0" data-zoomlevel="16" data-height="auto" data-components="Behavior"></div>
+            </div>
+        </div>
+
+        <script>
+            $('#map').on('heremapready', configureMap);
+
+            function configureMap(event, map) {
+                // Create a positioning manager
+                var positioning = new nokia.maps.positioning.Manager();
+
+                // Create a marker that is initially positioned at coordinates 0,0
+                var marker = new nokia.maps.map.StandardMarker([0,0]);
+                map.objects.add(marker);
+
+                // Ask the positioning manager to watch the user's position
+                positioning.watchPosition(positioningSuccess, positioningError);
+
+                // This function is called when a position was successfully determined
+                function positioningSuccess(position) {
+                    marker.set('coordinate', position.coords);
+                    map.setCenter(position.coords);
+                }
+
+                // This function is called if an error occurs while determining the position
+                function positioningError(error) {
+                    alert('Error code ' + error.code);
+                }
+            }
+        </script>
+    </body>
+</html>
